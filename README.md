@@ -1,216 +1,121 @@
-# ⚡ Roblox Weapon System - Zeus
+# 🎮 Sistema de Movimentação — Roblox Battlegrounds
 
-Sistema de armas profissional para Roblox com a arma **Raio Olímpico (Zeus)**.
+> Um sistema de movimento fluido e responsivo inspirado em Roblox Battlegrounds com sprint, dash multidirecional e efeitos de câmera.
 
-## 🎯 Características
+## ✨ Features
 
-✅ **Sistema de energia** (100 max, +10/s regeneração)
-✅ **4 tipos de ataque** (M1, M2, Z, X, C)
-✅ **Efeitos visuais profissionais** (Beam + ParticleEmitter)
-✅ **Sistema de cooldown automático**
-✅ **Framework extensível** para criar mais armas
-✅ **Código bem estruturado e documentado**
+- ⚡ **Sprint** — Aumenta velocidade com Shift
+- 🔄 **Dash em 4 direções** — Q + WASD para controlar direção
+- 📷 **Camera Zoom Effect** — Feedback visual durante dash
+- ⏱️ **Sistema de Cooldown** — Evita spam de dash
+- 🎯 **Movimento fluido** — BodyVelocity para física natural
 
-## 🚀 Como usar
+## 📋 Requisitos
 
-### 1. Preparar o Roblox
-Clone ou baixe este repositório:
+- Roblox Studio
+- Conhecimento básico de Lua
+- Paciência para configurar 😄
+
+## 🚀 Instalação Rápida
+
+### 1. Estrutura no Roblox
+
+Crie esta hierarquia no seu jogo:
+
 ```
-git clone https://github.com/HENDA679/roblox-weapon-system.git
+StarterPlayer
+ └── StarterPlayerScripts
+      └── MovementClient (LocalScript)
+
+ReplicatedStorage
+ └── RemoteEvent
+      └── DashEvent
 ```
 
-### 2. Copiar para seu jogo
-Copie a pasta `src/` para:
-```
-ServerScriptService/src/
-```
+### 2. Copie o Script
 
-### 3. Criar LocalScript
-Crie um `LocalScript` no `StarterPlayer` e copie o conteúdo de `examples/ZeusExample.lua`
+1. Abra `src/MovementClient.lua`
+2. Copie todo o conteúdo
+3. Cole no **MovementClient** LocalScript do seu jogo
 
-### 4. Testar
-Jogue no Roblox Studio e use os controles!
+### 3. Teste
+
+- **Shift** — Sprint
+- **Q + W/A/S/D** — Dash em 4 direções
 
 ## 🎮 Controles
 
-| Tecla | Ação | Energia | Cooldown |
-|-------|------|---------|----------|
-| **M** | M1 - Combo de 3 golpes | - | - |
-| **N** | M2 - Raio em linha reta | - | 2s |
-| **Z** | Julgamento Celestial | 25 | 8s |
-| **X** | Passo Tempestade | 15 | 4s |
-| **C** | Domínio da Tempestade (ULT) | 50 | 28s |
-| **U** | Ver status | - | - |
+| Tecla | Ação |
+|-------|------|
+| **Shift (segurado)** | Sprint |
+| **Q + W** | Dash para frente |
+| **Q + S** | Dash para trás |
+| **Q + A** | Dash para esquerda |
+| **Q + D** | Dash para direita |
+| **Q** (sem direção) | Dash para frente (padrão) |
 
-## ⚡ Habilidades Detalhadas
+## ⚙️ Configurações
 
-### M1 - Combo (Gratuito)
-- **3 golpes** sequenciais
-- **3º golpe** aplica pequeno stun
-- **Alcance:** Médio
-- **Dano:** Alto (teste)
-
-### M2 - Raio (Gratuito)
-- **Lança raio** em linha reta
-- **Cooldown:** 2s
-- **Efeito:** Beam elétrico
-
-### Z - Julgamento Celestial
-- **Dano:** Alto
-- **Energia:** 25
-- **Cooldown:** 8s
-- **Mecânica:** 
-  - Marca o alvo com efeito visual
-  - 1 segundo depois → raio cai
-  - Pode ser esquivado
-  - Área pequena de impacto
-
-### X - Passo Tempestade
-- **Dano:** Baixo
-- **Energia:** 15
-- **Cooldown:** 4s
-- **Mecânica:**
-  - Dash rápido na direção do player
-  - Atravessa inimigos (não atravessa paredes)
-  - Imunidade curta: 0.3s
-
-### C - Domínio da Tempestade (ULT)
-- **Dano:** Contínuo (alto se ficar dentro)
-- **Energia:** 50
-- **Cooldown:** 28s
-- **Mecânica:**
-  - Área grande se ativa por 6s
-  - Raios caem aleatoriamente a cada 0.3s
-  - Inimigos podem sair da área
-  - Efeito visual impressionante com partículas
-
-## 🔋 Sistema de Energia
-
-```
-Energia máxima: 100
-Regeneração: +10 por segundo
-
-Consumo:
-  Z = 25 energia
-  X = 15 energia
-  C = 50 energia
-```
-
-⚠️ **Importante:** Sem energia = sem habilidade (força estratégia e gerenciamento)
-
-## 📁 Estrutura do Projeto
-
-```
-roblox-weapon-system/
-├── src/
-│   ├── Weapons/
-│   │   ├── WeaponBase.lua       ← Classe base (toda arma herda daqui)
-│   │   ├── Zeus.lua             ← Implementação da arma Zeus
-│   │   └── WeaponManager.lua    ← Gerenciador de múltiplas armas
-│   ├── Effects/
-│   │   └── LightningEffect.lua  ← Efeitos visuais (Beam + Partículas)
-│   └── Energy/
-│       └── (para futuro)
-├── examples/
-│   └── ZeusExample.lua          ← Exemplo completo de uso
-└── README.md                    ← Este arquivo
-```
-
-## 🔧 Como Estender
-
-### Criar Nova Arma
-
-1. Crie um novo arquivo em `src/Weapons/`
-2. Use `WeaponBase` como classe pai
-3. Implemente as funções desejadas
+Todos os valores podem ser ajustados no início do script:
 
 ```lua
-local MyWeapon = setmetatable({}, {__index = WeaponBase})
-MyWeapon.__index = MyWeapon
-
-function MyWeapon.new(character, humanoidRootPart)
-    local self = WeaponBase.new(character, humanoidRootPart)
-    setmetatable(self, MyWeapon)
-    self.name = "⚔️ Minha Arma"
-    return self
-end
+local NORMAL_SPEED = 16        -- Velocidade normal
+local SPRINT_SPEED = 26        -- Velocidade de sprint
+local DASH_POWER = 85          -- Força do dash
+local DASH_TIME = 0.15         -- Duração do dash (segundos)
+local DASH_COOLDOWN = 0.7      -- Tempo entre dashes
 ```
 
-## 📊 Debugg
+Veja `docs/CONFIGURACAO.md` para mais detalhes e presets!
 
-O sistema imprime mensagens automáticas:
-- ✅ Ações bem-sucedidas
-- ⚠️ Alertas de energia insuficiente
-- ⏱️ Cooldowns restantes
-- 💥 Efeitos visuais
+## 📚 Documentação
 
-Abra **Output** no Roblox Studio para ver!
+- 📖 **[CONFIGURACAO.md](docs/CONFIGURACAO.md)** — Guia completo de configurações
+- 🗺️ **[ROADMAP.md](docs/ROADMAP.md)** — Plano de desenvolvimento
+- 🆘 **[TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md)** — Resolução de problemas
+- 🎯 **[basic-setup.md](examples/basic-setup.md)** — Tutorial para iniciantes
 
-## 🎨 Efeitos Visuais
+## 🎨 Próximos Passos
 
-### Beam (Raio)
-- Linha de luz brilhante azul
-- Conecta dois pontos
-- Duração: 0.5s
+### v1.1 (Próximo)
+- [ ] Air Dash
+- [ ] Animações de movimento
+- [ ] Sons sincronizados
 
-### ParticleEmitter (Partículas)
-- Explosão de partículas azuis
-- 100 partículas/segundo
-- Queda com gravidade
-- Efeito realista
+### v1.2
+- [ ] Wall Run
+- [ ] Slide no chão
+- [ ] Efeitos de partículas
 
-### Marca Visual
-- Esfera pulsante no alvo
-- Anuncia o impacto de Julgamento Celestial
-- Duração: 0.5s
+### v2.0
+- [ ] Sistema de Awakening
+- [ ] Movimentos únicos por personagem
+- [ ] Trails e afterimages
 
-### Área de Tempestade
-- Esfera grande semitransparente
-- Raios caindo aleatoriamente
-- Duração: 6 segundos
+Ver roadmap completo em **[ROADMAP.md](docs/ROADMAP.md)**
 
-## 🐛 Troubleshooting
+## 💡 Dicas Profissionais
 
-**Problema:** Nada acontece quando pressiono as teclas
-- **Solução:** Verifique se o `LocalScript` está em `StarterPlayer`
+Para deixar o movimento **absolutamente insano**, adicione:
 
-**Problema:** Erro "WeaponBase not found"
-- **Solução:** Certifique-se de que a pasta `src/` está em `ServerScriptService`
+1. 🎬 **Camera Shake** — Tremores durante dash
+2. 🌪️ **Partículas** — Efeito de fumaça/energia
+3. 🔊 **Sons** — Dash elétrico + impacto
+4. ⏸️ **Hit Pause** — Congelamento de frames rápido
+5. 🖼️ **Animações** — Transições suaves
 
-**Problema:** Efeitos não aparecem
-- **Solução:** Verifique se `LightningEffect.lua` está em `src/Effects/`
+> "Um bom movimento Battlegrounds não é sobre números. É sobre **sensação**."
 
-## 📚 Conceitos Aprendidos
+## 🐛 Problemas?
 
-- ✅ OOP (Object-Oriented Programming) em Lua
-- ✅ Sistema de herança com metatables
-- ✅ Gerenciamento de energia e cooldown
-- ✅ Efeitos visuais (Beam + Partículas)
-- ✅ Async/await com `task.wait()`
-- ✅ Input handling com `UserInputService`
-- ✅ Heartbeat para atualização contínua
-
-## 📝 Próximos Passos
-
-- [ ] Sistema de dano (HitBox detection)
-- [ ] Animações customizadas
-- [ ] Sons e efeitos de áudio
-- [ ] Skill trees / upgrades
-- [ ] Multiplayer sincronização
-- [ ] Mais armas (Fogo, Gelo, Vento)
-- [ ] Sistema de combo visual
-- [ ] Leaderboard de dano
-
-## 👨‍💻 Autor
-
-**HENDA679** - Sistema completo de armas para Roblox
+Consulte **[TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md)** para soluções rápidas.
 
 ## 📄 Licença
 
-MIT - Use livremente!
+MIT License — Use livremente em seus projetos!
 
 ---
 
-**Feito com ⚡ para a comunidade Roblox!**
+**Desenvolvido com ❤️ para a comunidade Roblox**
 
-🌟 Se gostou, deixe uma ⭐ no repositório!
+⭐ Se achou útil, não esquece de dar uma estrela! ⭐

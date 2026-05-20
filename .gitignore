@@ -1,0 +1,38 @@
+# Roblox
+*.lock
+.rbxl
+.rbxlx
+.rbxm
+.rbxmx
+
+# OS
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# IDE
+.vscode/
+.idea/
+*.code-workspace
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+
+# Dependencies
+node_modules/
+package-lock.json
+yarn.lock
+
+# Temporary
+*.tmp
+*.temp
+.cache/
+
+# Build
+dist/
+build/
+out/
